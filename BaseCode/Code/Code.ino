@@ -37,7 +37,7 @@ void interval_control_code(void) {
   int ball  = analogRead(BAL_PIN);
   const float V_STIC_POS = 0.34f;
   const float V_STIC_NEG = 0.37f;
-  float Kp = -25; // value is changed throughout 
+  float Kp = -30; // value is changed throughout 
 
 
   // Exercise B Code
