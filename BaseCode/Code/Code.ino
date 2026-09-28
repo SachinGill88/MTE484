@@ -37,7 +37,7 @@ void interval_control_code(void) {
   int ball  = analogRead(BAL_PIN);
   const float V_STIC_POS = 0.34f;
   const float V_STIC_NEG = 0.37f;
-  float Kp = -30; // value is changed throughout 
+  float Kp = -25; // value is changed throughout 
 
 
   // Exercise B Code
@@ -77,13 +77,15 @@ void interval_control_code(void) {
   float theta_ref; 
 
   if ((millis()/1000) % 2 ==0){
-    theta_ref = -0.1f; 
+    theta_ref = -1.0f; 
   }
   else {
-    theta_ref = 0.1f;
+    theta_ref = 1.0f;
   }
 
-  float error = theta_ref - theta;
+  float theta_ref_sat = constrain(theta_ref, -0.7f, 0.7f); // constrain the reference signal to be between -1 and 1
+
+  float error = theta_ref_sat - theta;
 
   float controlVoltage = Kp * error;
 
@@ -120,6 +122,8 @@ void interval_control_code(void) {
   Serial.print(millis());
   Serial.print(",");
   Serial.print(theta_ref,4);
+  Serial.print(",");
+  Serial.print(theta_ref_sat,4);
   Serial.print(",");
   Serial.print(theta, 4);
   Serial.print(",");
