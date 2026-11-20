@@ -6,6 +6,7 @@ double previousControlVoltage = 0.0;
 double previousBallError = 0.0; // *
 double previousThetaRef = 0.0; // *
 double integralThetaRef = 0.0; // *
+// const double OUTER_KI = 0.2;
 const double OUTER_KI = 0.1; // *
 int count = 0;
 const double TEST_ANGLE = -0.7; // Part F: test 
@@ -40,9 +41,12 @@ void interval_control_code(void) {
   // double theta_ref = 0.987577639751553 * previousThetaRef
   //                  - 6.962608695652174 * ballError
   //                  + 6.950434782608695 * previousBallError;
-  double leadThetaRef = 0.987577639751553 * previousThetaRef // *
-                   - 6.962608695652174 * ballError // *
-                   + 6.950434782608695 * previousBallError; // *
+  // double leadThetaRef = 0.987577639751553 * previousThetaRef
+  //                    - 6.962608695652174 * ballError
+  //                    + 6.950434782608695 * previousBallError;
+  double leadThetaRef = 0.975796492961225 * previousThetaRef // *
+                   - 20.042695638711148 * ballError // *
+                   + 19.996728392150896 * previousBallError; // *
   double integralChange = -OUTER_KI * 0.005 * 0.5 * (ballError + previousBallError); // *
   double candidateThetaRef = leadThetaRef + integralThetaRef + integralChange; // *
   if (theta >= -0.8 && theta <= 0.8 && // *

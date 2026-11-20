@@ -83,7 +83,7 @@ void interval_control_code(void) {
     theta_ref = 1.0f;
   }
 
-  float theta_ref_sat = constrain(theta_ref, -0.7f, 0.7f); // constrain the reference signal to be between -1 and 1
+  float theta_ref_sat = constrain(theta_ref, -0.7f, 0.7f); // constrain the reference signal to be between -0.7 and 1
 
   float error = theta_ref_sat - theta;
 
